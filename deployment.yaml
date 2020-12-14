@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cache-deploy
+  labels:
+    app: cache-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cache-app
+  template:
+    metadata:
+      labels:
+        app: cache-app
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: cache-app
+        image: tshanker/cache-service:latest
+        ports:
+        - containerPort: 8080
